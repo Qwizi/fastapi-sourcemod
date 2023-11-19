@@ -1,7 +1,7 @@
 
 from fastapi import HTTPException
-from fastapi_sourcemod_admins.db import BaseService
-from fastapi_sourcemod_admins.models import Admin, Group
+from fastapi_sourcemod.db import BaseService
+from fastapi_sourcemod.models import Admin, Group
 
 
 admin_not_found_exception = HTTPException(

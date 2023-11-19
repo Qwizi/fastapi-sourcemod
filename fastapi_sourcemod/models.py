@@ -1,8 +1,8 @@
 from typing import Optional
 import ormar
 
-from fastapi_sourcemod_admins.db import BaseMeta, DateFieldsMixins
-from fastapi_sourcemod_admins.enums import AuthTypeEnum
+from fastapi_sourcemod.db import BaseMeta, DateFieldsMixins
+from fastapi_sourcemod.enums import AuthTypeEnum
 
 
 class Group(ormar.Model, DateFieldsMixins):
