@@ -2,10 +2,10 @@
 from fastapi import APIRouter, Depends
 from fastapi_pagination import Page, Params
 
-from fastapi_sourcemod_admins.dependencies import get_admins_service, get_valid_admin
-from fastapi_sourcemod_admins.models import Admin
-from fastapi_sourcemod_admins.schemas import AdminOut, CreateAdminSchema
-from fastapi_sourcemod_admins.services import AdminService
+from fastapi_sourcemod.dependencies import get_admins_service, get_valid_admin
+from fastapi_sourcemod.models import Admin
+from fastapi_sourcemod.schemas import AdminOut, CreateAdminSchema
+from fastapi_sourcemod.services import AdminService
 
 
 router = APIRouter()

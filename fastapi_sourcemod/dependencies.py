@@ -1,7 +1,7 @@
 
 from fastapi import Depends
 from ormar import NoMatch
-from fastapi_sourcemod_admins.services import AdminService, GroupService, admin_not_found_exception, group_not_found_exception
+from fastapi_sourcemod.services import AdminService, GroupService, admin_not_found_exception, group_not_found_exception
 
 
 async def get_admins_service() -> AdminService:

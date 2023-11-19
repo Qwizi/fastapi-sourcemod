@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from fastapi_pagination import Page, Params
-from fastapi_sourcemod_admins.dependencies import get_groups_service, get_valid_group
-from fastapi_sourcemod_admins.models import Group
-from fastapi_sourcemod_admins.schemas import CreateGroupSchema, GroupOut
+from fastapi_sourcemod.dependencies import get_groups_service, get_valid_group
+from fastapi_sourcemod.models import Group
+from fastapi_sourcemod.schemas import CreateGroupSchema, GroupOut
 
-from fastapi_sourcemod_admins.services import GroupService
+from fastapi_sourcemod.services import GroupService
 
 
 router = APIRouter()

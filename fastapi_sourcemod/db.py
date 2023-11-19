@@ -5,7 +5,7 @@ from fastapi import HTTPException
 from fastapi_pagination import Params
 import ormar
 import sqlalchemy
-from fastapi_sourcemod_admins.settings import get_settings
+from fastapi_sourcemod.settings import get_settings
 from sqlite3 import IntegrityError as SQLIntegrityError
 from psycopg2 import IntegrityError
 from asyncpg import UniqueViolationError

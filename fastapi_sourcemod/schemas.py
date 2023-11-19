@@ -1,8 +1,8 @@
 
 from typing import Optional
 from pydantic import BaseModel
-from fastapi_sourcemod_admins.enums import AuthTypeEnum
-from fastapi_sourcemod_admins.models import Admin, Group
+from fastapi_sourcemod.enums import AuthTypeEnum
+from fastapi_sourcemod.models import Admin, Group
 
 
 admin_out =  Admin.get_pydantic()
