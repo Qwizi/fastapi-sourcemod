@@ -1,14 +1,15 @@
 import asyncio
 from logging.config import fileConfig
+import os
 
 from sqlalchemy import pool
 from sqlalchemy.engine import Connection
-from sqlalchemy.ext.asyncio import async_engine_from_config
+from sqlalchemy.ext.asyncio import async_engine_from_config, create_async_engine
 
 from alembic import context
 
 from fastapi_sourcemod.db import BaseMeta
-from fastapi_sourcemod.models import Admin, Group
+from fastapi_sourcemod.admins.models import AdminGroup, Admin, Group, GroupImmunity, GroupOverride, Override, Config
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -30,6 +31,13 @@ target_metadata = BaseMeta.metadata
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
 
+def get_url() -> str:
+    POSTGRES_USER = os.getenv("POSTGRES_USER", "")
+    POSTGRES_PASSWORD = os.getenv("POSTGRES_PASSWORD", "")
+    POSTGRES_HOST = os.getenv("POSTGRES_HOST", "")
+    POSTGRES_PORT = os.getenv("POSTGRES_PORT", "5432")
+    POSTGRES_DB = os.getenv("POSTGRES_DB", "")
+    return f"postgresql+asyncpg://{POSTGRES_USER}:{POSTGRES_PASSWORD}@{POSTGRES_HOST}:{POSTGRES_PORT}/{POSTGRES_DB}"
 
 def run_migrations_offline() -> None:
     """Run migrations in 'offline' mode.
@@ -43,17 +51,7 @@ def run_migrations_offline() -> None:
     script output.
 
     """
-    import re
-    import os
-
-    url_tokens = {
-        "POSTGRES_USER": os.getenv("POSTGRES_USER", ""),
-        "POSTGRES_PASSWORD": os.getenv("POSTGRES_PASSWORD", ""),
-        "POSTGRES_HOST": os.getenv("POSTGRES_HOST", ""),
-        "POSTGRES_DB": os.getenv("POSTGRES_DB", "")
-    }
-
-    url = config.get_main_option("sqlalchemy.url")
+    url = get_url()
 
     context.configure(
         url=url,
@@ -79,10 +77,8 @@ async def run_async_migrations() -> None:
 
     """
 
-    connectable = async_engine_from_config(
-        config.get_section(config.config_ini_section, {}),
-        prefix="sqlalchemy.",
-        poolclass=pool.NullPool,
+    connectable = create_async_engine(
+        get_url()
     )
 
     async with connectable.connect() as connection:

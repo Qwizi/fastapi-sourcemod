@@ -5,8 +5,8 @@ from fastapi.routing import APIRoute
 from starlette.middleware.cors import CORSMiddleware
 
 from fastapi_sourcemod.db import database
-from fastapi_sourcemod.views.admins import router as admins_router
-from fastapi_sourcemod.views.groups import router as groups_router
+from fastapi_sourcemod.admins.views.admins import router as admins_router
+from fastapi_sourcemod.admins.views.groups import router as groups_router
 def custom_generate_unique_id(route: APIRoute):
     return f"{route.tags[0]}-{route.name}"
 
@@ -46,7 +46,7 @@ def create_app() -> FastAPI:
 
     
     _app.include_router(admins_router, prefix="/v1/admins", tags=['admins'])
-    _app.include_router(groups_router, prefix="/v1/groups", tags=["groups"])
+    _app.include_router(groups_router, prefix="/v1/admins/groups", tags=["admins-groups"])
 
     return _app
 
